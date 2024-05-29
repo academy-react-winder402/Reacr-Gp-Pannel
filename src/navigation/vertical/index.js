@@ -1,30 +1,53 @@
 import { Mail, Home, Airplay, Circle } from "react-feather";
+import UsersList from "../../pages/Users/UsersList/UsersList";
 
 export default [
   {
     id: "home",
-    title: "Home",
+    title: "داشبورد",
     icon: <Home size={20} />,
     navLink: "/home",
   },
   {
     id: "secondPage",
-    title: "Second Page",
+    title: " کاربران",
     icon: <Mail size={20} />,
-    navLink: "/second-page",
-  },
-  {
-    id: "smaplePage",
-    title: "Sample Page",
-    icon: <Airplay size={20} />,
-    // navLink: "/sample",
     children: [
       {
-        id: "invoiceList",
-        title: "List",
+        id: "UsersList",
+        title: "لیست کاربران",
         icon: <Circle size={12} />,
-        navLink: "/apps/invoice/list",
+        navLink: "/UsersList",
       },
+      {
+        id: "CreateUser",
+        title: "ایجاد کاربران",
+        icon: <Circle size={12} />,
+        navLink: "/CreateUser",
+      },      
     ],
   },
+
+{
+  id:'cours',
+  title:' دوره ها',
+  icon:<Circle size={12} />,
+  children: [
+    {
+      id: "CoursesList",
+      title: "لیست دوره ها",
+      icon: <Circle size={12} />,
+      navLink: "/CoursesList",
+    },
+    {
+      id: "CreateCourse",
+      title: "ایجاد دوره",
+      icon: <Circle size={12} />,
+      navLink: "/CreateCourse",
+    },      
+  ],
+
+}
+
+
 ];

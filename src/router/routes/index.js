@@ -12,6 +12,10 @@ import PublicRoute from "@components/routes/PublicRoute";
 
 // ** Utils
 import { isObjEmpty } from "@utils";
+import UsersList from "../../pages/Users/UsersList/UsersList";
+import CreateUser from "../../pages/Users/CreateUser/CreateUser";
+import CoursesList from "../../pages/Courses/CoursesList/CoursesList";
+import CreateCourse from "../../pages/Courses/CreateCourse/CreateCourse";
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -49,6 +53,24 @@ const Routes = [
     element: <Sample />,
   },
   {
+    path: "/UsersList",
+    element: <UsersList />,
+  },
+  {
+    path: "/CreateUser",
+    element: <CreateUser />,
+  }, 
+  {
+    path: "/CoursesList",
+    element: <CoursesList />,
+  },
+  {
+    path: "/CreateCourse",
+    element: <CreateCourse />,
+  },  
+  
+
+  {
     path: "/second-page",
     element: <SecondPage />,
   },
@@ -80,6 +102,7 @@ const Routes = [
       layout: "blank",
     },
   },
+
   {
     path: "*",
     element: <Error />,
@@ -87,6 +110,7 @@ const Routes = [
       layout: "blank",
     },
   },
+  
 ];
 
 const getRouteMeta = (route) => {
