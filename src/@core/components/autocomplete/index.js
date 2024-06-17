@@ -179,7 +179,7 @@ const Autocomplete = (props) => {
       .slice(0, suggestionLimit);
     filteredData.push(...sortSingleData);
     if (sortSingleData.length) {
-      return sortSingleData.map((suggestion, index) => {
+      return sortSingleData?.map((suggestion, index) => {
         const suggestionURL =
           suggestion.link !== undefined && suggestion.link !== null
             ? suggestion.link

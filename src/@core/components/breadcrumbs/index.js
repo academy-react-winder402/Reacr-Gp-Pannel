@@ -28,7 +28,7 @@ const BreadCrumbs = (props) => {
   const { data, title } = props;
 
   const renderBreadCrumbs = () => {
-    return data.map((item, index) => {
+    return data?.map((item, index) => {
       const Wrapper = item.link ? Link : Fragment;
       const isLastItem = data.length - 1 === index;
       return (

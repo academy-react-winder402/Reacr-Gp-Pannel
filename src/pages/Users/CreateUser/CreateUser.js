@@ -1,7 +1,10 @@
+import CreateUserComponent from "../../../component/UserComponent/CreateUserComponent/CreateUserComponent";
+
 const CreateUser = () => {
     return (
         <>
-        CreateUser
+        <CreateUserComponent/>
+        
         </>
     );
 }

@@ -20,7 +20,7 @@ const AvatarGroup = (props) => {
 
   // ** Render Data
   const renderData = () => {
-    return data.map((item, i) => {
+    return data?.map((item, i) => {
       const ItemTag = item.tag ? item.tag : "div";
       return (
         <Fragment key={i}>

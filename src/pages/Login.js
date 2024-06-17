@@ -1,6 +1,6 @@
 // ** React Imports
 import { useSkin } from "@hooks/useSkin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // ** Icons Imports
 import { Facebook, Twitter, Mail, GitHub } from "react-feather";
@@ -26,11 +26,25 @@ import illustrationsDark from "@src/assets/images/pages/login-v2-dark.svg";
 
 // ** Styles
 import "@styles/react/pages/page-authentication.scss";
+import { Formik } from "formik";
+import http from '../core/services/interceptore'
+import { setItem } from "../core/common/storage.services";
 
 const Login = () => {
   const { skin } = useSkin();
+  const navigate = useNavigate()
 
   const source = skin === "dark" ? illustrationsDark : illustrationsLight;
+
+
+  const handleLogin =async (values) =>{
+    const res = await http.post('/Sign/Login' , values)
+    if(res.roles.includes('Administrator')){
+      setItem('token' , res.token)
+      navigate('/home')
+    }
+    console.log(res);
+  }
 
   return (
     <div className="auth-wrapper auth-cover">
@@ -121,45 +135,57 @@ const Login = () => {
             <CardText className="mb-2">
               Please sign-in to your account and start the adventure
             </CardText>
-            <Form
-              className="auth-login-form mt-2"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <div className="mb-1">
-                <Label className="form-label" for="login-email">
-                  Email
-                </Label>
-                <Input
-                  type="email"
-                  id="login-email"
-                  placeholder="john@example.com"
-                  autoFocus
-                />
-              </div>
-              <div className="mb-1">
-                <div className="d-flex justify-content-between">
-                  <Label className="form-label" for="login-password">
-                    Password
-                  </Label>
-                  <Link to="/forgot-password">
-                    <small>Forgot Password?</small>
-                  </Link>
-                </div>
-                <InputPasswordToggle
-                  className="input-group-merge"
-                  id="login-password"
-                />
-              </div>
-              <div className="form-check mb-1">
-                <Input type="checkbox" id="remember-me" />
-                <Label className="form-check-label" for="remember-me">
-                  Remember Me
-                </Label>
-              </div>
-              <Button tag={Link} to="/" color="primary" block>
-                Sign in
-              </Button>
-            </Form>
+            <Formik initialValues={{ phoneOrGmail: "", password: "", rememberMe: false }} onSubmit={handleLogin}>
+              {({values , handleChange , handleSubmit})=>(
+                <Form
+                    className="auth-login-form mt-2"
+                    onSubmit={handleSubmit}
+                  >
+                    <div className="mb-1">
+                      <Label className="form-label" for="login-email">
+                        Email
+                      </Label>
+                      <Input
+                        type="text"
+                        id="login-email"
+                        placeholder="john@example.com"
+                        autoFocus
+                        name="phoneOrGmail"
+                        value={values.phoneOrGmail}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="mb-1">
+                      <div className="d-flex justify-content-between">
+                        <Label className="form-label" for="login-password">
+                          Password
+                        </Label>
+                        <Link to="/forgot-password">
+                          <small>Forgot Password?</small>
+                        </Link>
+                      </div>
+                      <InputPasswordToggle
+                        className="input-group-merge"
+                        id="login-password"
+                        name="password"
+                        value={values.password}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="form-check mb-1">
+                      <Input  type="checkbox" name='rememberMe' onChange={handleChange}  id="remember-me" />
+                      <Label className="form-check-label" for="remember-me">
+                        Remember Me
+                      </Label>
+                    </div>
+                    <Button type="submit" color="primary" block>
+                      Sign in
+                    </Button>
+                </Form>
+
+              )}
+
+            </Formik>
             <p className="text-center mt-2">
               <span className="me-25">New on our platform?</span>
               <Link to="/register">

@@ -1,8 +1,10 @@
+import UserListComponent from "../../../component/UserComponent/UserListComponent/UserListComponent";
+
 const UsersList = () => {
     return (
 
         <>
-        UsersList
+        <UserListComponent/>
         </>
     );
 }

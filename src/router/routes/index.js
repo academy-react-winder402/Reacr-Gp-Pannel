@@ -17,6 +17,8 @@ import CreateUser from "../../pages/Users/CreateUser/CreateUser";
 import CoursesList from "../../pages/Courses/CoursesList/CoursesList";
 import CreateCourse from "../../pages/Courses/CreateCourse/CreateCourse";
 
+// import '../../apps'
+
 const getLayout = {
   blank: <BlankLayout />,
   vertical: <VerticalLayout />,
@@ -27,7 +29,7 @@ const getLayout = {
 const TemplateTitle = "%s - Vuexy React Admin Template";
 
 // ** Default Route
-const DefaultRoute = "/home";
+const DefaultRoute = "/login";
 
 const Home = lazy(() => import("../../pages/Home"));
 const SecondPage = lazy(() => import("../../pages/SecondPage"));
@@ -69,7 +71,10 @@ const Routes = [
     element: <CreateCourse />,
   },  
   
-
+  // {
+  //   path: "/chat",
+  //   element: <
+  // },
   {
     path: "/second-page",
     element: <SecondPage />,
